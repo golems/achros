@@ -1,0 +1,18 @@
+<!-- ROS Manifest for Ach IPC Library -->
+
+<package>
+  <description brief="ROS interface to Ach IPC for Real-Time Robot Control">
+    ROS goop to send messages via ach.
+  </description>
+  <author>Neil T. Dantam/ntd@gatech.edu</author>
+  <license>BSD</license>
+  <url>http://www.golems.org/node/1526</url>
+  <depend package="pkgname"/>
+  <depend package="common"/>
+  <depend package="ach"/>
+  <versioncontrol type="git" url="http://github.com/golems/ach-ros"/>
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lach-ros -lach -lrt -lpthread"/>
+  </export>
+  <review status="experimental"/>
+</package>
