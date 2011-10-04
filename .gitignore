@@ -1,2 +1,9 @@
 /build
 /lib/libachros.so
+/CMakeCache.txt
+/CMakeFiles/
+/src/CMakeFiles/
+/src/Makefile
+/cmake_install.cmake
+/src/cmake_install.cmake
+/Makefile
