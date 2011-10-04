@@ -1,4 +1,4 @@
-/* -*- mode: C; c-basic-offset: 2 -*- */
+/* -*- mode: C++; c-basic-offset: 2 -*- */
 /* ex: set shiftwidth=2 tabstop=2 expandtab: */
 /*
  * Copyright (c) 2011, Georgia Tech Research Corporation
@@ -71,16 +71,35 @@ public:
   virtual ~TransportAch();
 
   /** \brief Create the channel */
-  int create(size_t index_slots, size_t msg_bytes);
+  int create(size_t index_slots=16, size_t msg_bytes=8192);
   /** \brief Open the channel */
   int open();
+  /** \brief Option flags for ach_get */
+  void setGetOptions( int opts ) { get_options_ = opts; }
 
-  /** \brief Close the channel */
-  int close();
+  // overrides from Transport
+  virtual int32_t read(uint8_t* buffer, uint32_t size);
+  virtual int32_t write(uint8_t* buffer, uint32_t size);
+
+  // these don't mean anything to Ach
+  virtual void enableWrite() {}
+  virtual void disableWrite() {}
+  virtual void enableRead() {}
+  virtual void disableRead() {}
+
+  virtual void close();
+
+  virtual std::string getTransportInfo();
+
+  virtual void parseHeader(const Header& header);
+
+  virtual const char* getType() { return "ACHROS"; }
 
 protected:
   ach_channel_t chan_;
   const char *chan_name_;
+  bool is_open_;
+  int get_options_;
 };
 
 
